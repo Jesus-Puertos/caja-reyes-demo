@@ -1,15 +1,27 @@
-import { object, string, number, boolean, Output, array } from 'valibot'
+import { object, string, number, InferOutput, array} from 'valibot'
 
-export const DraftProductSchema = object({
-    name: string(),
-    price: number()
-})
+export const DraftPatnerSchema = object({
+    numero_socio: string(),
+    fecha_apertura: string(),
+    nombre: string(),
+    apellido_paterno: string(),
+    apellido_materno: string(),
+    comunidad: string(),
+    municipio: string(),
+    cantidad: number(),
+});
 
-export const ProductSchema = object({
+export const PatnerSchema = object({
     id: number(),
-    name: string(),
-    price: number(),
-    availability: boolean()
-})
-export const ProductsSchema = array(ProductSchema)
-export type Product = Output<typeof ProductSchema>
+    numero_socio: string(),
+    fecha_apertura: string(),
+    nombre: string(),
+    apellido_paterno: string(),
+    apellido_materno: string(),
+    comunidad: string(),
+    municipio: string(),
+    cantidad: number(),
+});
+
+export const PatnersSchema = array(PatnerSchema);
+export type Patner =  InferOutput< typeof PatnerSchema > ;

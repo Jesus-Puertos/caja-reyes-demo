@@ -1,36 +1,41 @@
-import { createBrowserRouter } from 'react-router-dom'
-import Layout from './layouts/Layout'
-import Products, { loader as productsLoader, action as updateAvailabilityAction } from './views/Products'
-import NewProduct, { action as newProductAction } from './views/NewProduct'
-import EditProduct, { loader as editProductLoader, action as editProductAction } from './views/EditProduct'
-import { action as deleteProductAction } from './components/ProductDetails'
+import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import Layout from './layouts/Layout';
+import Patners, { loader as patnersLoader } from './views/Patners';
+import NewPatner, { action as newPatnerAction } from './views/NewPatner';
+import EditPatner, { loader as editPatnerLoader, action as editPatnerAction } from './views/EditPatner';
+import { action as deleteProductAction } from './components/shared/PatnerDeatils';
 
-export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Layout />, 
-        children: [
-            {
-                index: true,
-                element: <Products />,
-                loader: productsLoader,
-                action: updateAvailabilityAction
-            },
-            {
-                path: 'productos/nuevo',
-                element: <NewProduct />,
-                action: newProductAction
-            },
-            {
-                path:'productos/:id/editar', // ROA Pattern - Resource-oriented design
-                element: <EditProduct />,
-                loader: editProductLoader,
-                action: editProductAction
-            }, 
-            {
-                path:'productos/:id/eliminar',
-                action: deleteProductAction
-            }
-        ],
-    }
-])
+
+const routes: RouteObject[] = [
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Patners />,
+        loader: patnersLoader
+      },
+      {
+        path: 'socios/nuevo',
+        element: <NewPatner />,
+        action: newPatnerAction
+      },
+      {
+        path: 'socios/:id/editar',
+        element: <EditPatner />,
+        loader: editPatnerLoader,
+        action: editPatnerAction
+      },
+      {
+        path: 'socios/:id/eliminar',
+        action: deleteProductAction
+      }
+    ]
+  },
+  
+];
+
+const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(routes);
+
+export default router;
